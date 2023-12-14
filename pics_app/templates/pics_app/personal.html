@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal</title>
+</head>
+<body>
+    <h2>Personal Pictures</h2>
+    {% for picture in user_pictures %}
+        <img src="{{ picture.image.url }}" alt="Picture" style="max-width: 300px; max-height: 300px;">
+        <p>Location: {{ picture.location }}</p>
+        <hr>
+    {% endfor %}
+    <a href="{% url 'home' %}">Home</a>
+</body>
+</html>
