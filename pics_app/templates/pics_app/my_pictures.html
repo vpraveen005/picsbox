@@ -1,0 +1,41 @@
+{% load my_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Pictures</title>
+</head>
+<body>
+    <h2>My Pictures</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+    <br>
+
+    {% if form.errors %}
+        <p style="color: red;">{{ form.errors.non_field_errors }}</p>
+    {% endif %}
+
+    <form method="get" action="{% url 'search_pictures' %}" class="search-form">
+        <label for="location">Location:</label>
+        <input type="text" name="location" id="location">
+        <label for="upload_time">Uploaded Time:</label>
+        <input type="text" name="upload_time" id="upload_time">
+        <button type="submit">Search</button>
+    </form>
+    <br>
+    {% for picture in pictures %}
+        <img src="{{ picture.image.url }}" alt="Uploaded Picture" width="360" height="250">
+        <p>Filename: {{ picture.image.name|basename }}</p>
+        <p>Uploaded Time: {{ picture.upload_time }}</p>
+        <p>Place: {{ picture.location }}</p>
+    {% endfor %}
+
+    <div class="footer">
+        <button onclick="location.href='{% url 'home' %}'">Logout</button>
+    </div>
+</body>
+</html>

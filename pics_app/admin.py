@@ -1,3 +1,4 @@
 from django.contrib import admin
+from pics_app.models import Picture
 
-# Register your models here.
+admin.site.register(Picture)

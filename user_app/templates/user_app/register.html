@@ -1,15 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-</head>
-<body>
-    <h2>Register</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {{ profile_form.as_p }}
-        <button type="submit">Register</button>
-    </form>
-</body>
-</html>
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Register - PicsBox</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+    </br>
+        <h2>Register On PicsBox</h2>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        {{ message }}
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        <form method="POST" class="mt-5 col-6">
+            {% csrf_token %}
+            {{ register_form|crispy }}
+            </br>
+            <button class="btn btn-primary mb-5" type="submit">Register</button>
+        </form>
+
+        <div class="buttons">
+            <button onclick="location.href='{% url 'home' %}'">Back</button>
+        </div>
+    </div>
+{% endblock content %}
