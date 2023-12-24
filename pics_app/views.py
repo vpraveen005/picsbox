@@ -21,8 +21,8 @@ def my_pictures(request):
             instance.save()
     else:
         form = PictureUploadForm()
-    pictures = Picture.objects.filter(uploaded_by=request.user)
-    return render(request, 'pics_app/my_pictures.html', {'form': form, 'pictures': pictures})
+    # pictures = Picture.objects.filter(uploaded_by=request.user)
+    return render(request, 'pics_app/my_pictures.html', {'form': form})
 
 # @login_required
 # def search_pictures(request):
@@ -58,3 +58,24 @@ def search_pictures(request):
         return render(request, 'pics_app/search_pictures.html', {'pictures': pictures, 'form': form})
     else:
         return render(request, 'pics_app/my_pictures.html', {'form': form})
+
+
+@login_required
+def other_users_pictures(request):
+    other_users_pictures = Picture.objects.exclude(uploaded_by=request.user)
+
+    context = {
+        'other_users_pictures': other_users_pictures,
+    }
+
+    return render(request, 'pics_app/other_users_pictures.html', context)
+
+@login_required
+def my_all_pictures(request):
+    my_all_pictures = Picture.objects.filter(uploaded_by=request.user)
+
+    context = {
+        'my_all_pictures': my_all_pictures,
+    }
+
+    return render(request, 'pics_app/my_all_pictures.html', context)

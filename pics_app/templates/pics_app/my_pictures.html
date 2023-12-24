@@ -7,14 +7,17 @@
     <title>My Pictures</title>
 </head>
 <body>
-    <h2>My Pictures</h2>
+    <h2>My Pictures - {{ request.user|title }}</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Upload</button>
     </form>
     <br>
-
+    <br>
+    <br>
+    <br>
+    <br>
     {% if form.errors %}
         <p style="color: red;">{{ form.errors.non_field_errors }}</p>
     {% endif %}
@@ -27,12 +30,28 @@
         <button type="submit">Search</button>
     </form>
     <br>
-    {% for picture in pictures %}
-        <img src="{{ picture.image.url }}" alt="Uploaded Picture" width="360" height="250">
-        <p>Filename: {{ picture.image.name|basename }}</p>
-        <p>Uploaded Time: {{ picture.upload_time }}</p>
-        <p>Place: {{ picture.location }}</p>
-    {% endfor %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="buttons">
+            <button onclick="location.href='{% url 'my_all_pictures' %}'">My Pictures</button>
+    </div>
+    <br>
+    <div class="buttons">
+            <button onclick="location.href='{% url 'other_users_pictures' %}'">Other Users Pictures</button>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<!--    {% for picture in pictures %}-->
+<!--        <img src="{{ picture.image.url }}" alt="Uploaded Picture" width="360" height="250">-->
+<!--        <p>Filename: {{ picture.image.name|basename }}</p>-->
+<!--        <p>Uploaded Time: {{ picture.upload_time }}</p>-->
+<!--        <p>Place: {{ picture.location }}</p>-->
+<!--    {% endfor %}-->
 
     <div class="footer">
         <button onclick="location.href='{% url 'home' %}'">Logout</button>

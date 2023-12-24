@@ -1,0 +1,34 @@
+{% load my_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All pictures</title>
+</head>
+<body>
+    <div class="header">
+         <h2>All pictures</h2>
+    </div>
+
+    {% if other_users_pictures %}
+        {% for picture in other_users_pictures %}
+            <div>
+                <img src="{{ picture.image.url }}" alt="Uploaded Picture" width="360" height="250">
+                <p>Filename: {{ picture.image.name|basename }}</p>
+                <p>Uploaded by: {{ picture.uploaded_by }}</p>
+                <p>Uploaded Time: {{ picture.upload_time }}</p>
+                <p>Place: {{ picture.location }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No pictures found.</p>
+    {% endif %}
+
+    <div class="buttons">
+            <button onclick="location.href='{% url 'my_pictures' %}'">Back</button>
+    </div>
+
+</body>
+</html>
+
